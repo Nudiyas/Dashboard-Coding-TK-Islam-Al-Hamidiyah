@@ -144,7 +144,7 @@ else:
     
     # Jalankan Modeling (Menerima 4 nilai: df_hasil_raw, centroid, model_kmeans, init_df)
     df_hasil_raw, centroid, model_kmeans, init_df = jalankan_kmeans(df_clean, X_scaled, n_clusters=k_pilihan)
-
+    
     # Labeling Cluster
     df_hasil_raw['Skor_Total_Urut'] = X_scaled.sum(axis=1)
     urutan = df_hasil_raw.groupby('Cluster')['Skor_Total_Urut'].mean().sort_values(ascending=False).index
