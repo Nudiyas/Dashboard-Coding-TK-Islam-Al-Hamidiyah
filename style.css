@@ -1,0 +1,87 @@
+/* style.css */
+
+/* 1. Pengaturan Dasar Layout Halaman */
+.block-container {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+
+/* 2. Komponen Banner Hero Box Atas */
+.hero-box {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 18px 24px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.hero-box h1 {
+    margin-bottom: 0; 
+    font-size: 1.6rem; 
+    font-weight: 700; 
+    line-height: 1.2;
+}
+.hero-box p {
+    opacity: 0.9; 
+    margin-top: 6px; 
+    font-size: 0.95rem; 
+    margin-bottom: 0;
+}
+
+/* 3. Kotak 3 Pilar Kompetensi (Sebelum Upload) */
+.pilar-box {
+    padding: 14px;
+    border-radius: 8px;
+    min-height: 110px;
+}
+.pilar-box h4 {
+    margin-top: 0; 
+    margin-bottom: 6px; 
+    font-size: 0.95rem;
+}
+.pilar-box p {
+    font-size: 12.5px; 
+    margin-bottom: 0; 
+    line-height: 1.4;
+}
+/* Variasi Warna Tiap Pilar */
+.pilar-algoritma {
+    background-color: #eff6ff;
+    border-left: 4px solid #2563eb;
+    color: #1e3a8a;
+}
+.pilar-algoritma h4 { color: #1e40af; }
+
+.pilar-pola {
+    background-color: #f0fdf4;
+    border-left: 4px solid #16a34a;
+    color: #14532d;
+}
+.pilar-pola h4 { color: #166534; }
+
+.pilar-perulangan {
+    background-color: #fff7ed;
+    border-left: 4px solid #ea580c;
+    color: #7c2d12;
+}
+.pilar-perulangan h4 { color: #9a3412; }
+
+/* 4. Standardisasi Hirarki Ukuran Judul & Teks */
+h2 {
+    font-size: 1.4rem !important;
+    margin-top: 1.5rem !important;
+}
+h3 { font-size: 1.25rem !important; }
+h4 { font-size: 1.1rem !important; }
+
+/* 5. Penyesuaian Dimensi Teks Kartu Metrik */
+[data-testid="stMetricValue"] { font-size: 1.4rem !important; }
+[data-testid="stMetricLabel"] { font-size: 0.85rem !important; }
+
+/* 6. Optimalisasi Kotak Info & Notifikasi (Insight Box) */
+[data-testid="stNotification"] p { font-size: 0.85rem !important; }
+
+/* 7. Pengecilan Display Rumus Matematika (LaTeX) */
+.katex-display {
+    font-size: 0.95rem !important;
+    margin: 0.5rem 0 !important;
+}
