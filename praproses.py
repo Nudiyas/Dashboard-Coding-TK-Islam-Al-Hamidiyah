@@ -6,6 +6,7 @@ def bersihkan_dan_transformasi(df):
     """
     Memproses dataframe untuk hanya mengambil kolom capaian nilai riil siswa (Rata_*)
     dan membuang kolom bobot/KKM kurikulum yang nilainya konstan.
+    Mengatasi data bolong karena absen dengan rata-rata nilai siswa itu sendiri.
     """
     df_clean = df.copy()
     
@@ -28,11 +29,21 @@ def bersihkan_dan_transformasi(df):
 
     kolom_target = ['Rata_Algoritma', 'Rata_Pola', 'Rata_Perulangan']
 
-    # 2. Paksa tipe data menjadi numerik dan isi data kosong dengan rata-rata
+    # 2. Paksa tipe data menjadi numerik (agar data kosong/teks aneh menjadi NaN)
     for col in kolom_target:
         if col in df_clean.columns:
             df_clean[col] = pd.to_numeric(df_clean[col], errors='coerce')
-            df_clean[col] = df_clean[col].fillna(df_clean[col].mean() if not pd.isna(df_clean[col].mean()) else 0)
+    
+    # Hitung rata-rata tiap siswa (secara horizontal/baris) dari kolom yang ada nilainya
+    # Fungsi .mean(axis=1) otomatis mengabaikan NaN (data bolong karena absen)
+    rata_rata_siswa = df_clean[kolom_target].mean(axis=1)
+    
+    # Isi data yang kosong (NaN) dengan nilai rata-rata siswa itu sendiri
+    for col in kolom_target:
+        if col in df_clean.columns:
+            # fillna(rata_rata_siswa) mengisi baris yang kosong sesuai rata-rata baris tersebut
+            # .fillna(0.0) adalah backup jika ada siswa yang absen di semua pertemuan
+            df_clean[col] = df_clean[col].fillna(rata_rata_siswa).fillna(0.0)
         else:
             df_clean[col] = 0.0
             
@@ -42,14 +53,14 @@ def bersihkan_dan_transformasi(df):
         if col in df_clean.columns:
             df_clean = df_clean.drop(columns=[col])
             
-    # Ambil matriks nilai murni untuk clustering
+    # 4. Ambil matriks nilai murni untuk clustering
     X = df_clean[kolom_target].values
     
-    # Normalisasi Min-Max Scaler (0-1)
+    # 5. Normalisasi Min-Max Scaler (0-1)
     min_val = X.min(axis=0)
     max_val = X.max(axis=0)
     range_val = max_val - min_val
-    range_val[range_val == 0] = 1.0
+    range_val[range_val == 0] = 1.0  # Mencegah error pembagian dengan nol
     
     X_scaled = (X - min_val) / range_val
     X_scaled_df = pd.DataFrame(X_scaled, columns=kolom_target)
