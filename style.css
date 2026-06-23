@@ -1,5 +1,27 @@
 /* style.css */
+/* Menghilangkan padding bawaan Streamlit pada elemen markdown */
+div[data-testid="stMarkdownContainer"] {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+/* Menghilangkan ruang kosong di atas konten utama */
+.main .block-container {
+    padding-top: 0rem !important;
+}
 
+/* Opsional: Jika Anda ingin kotak biru sedikit lebih naik lagi */
+.hero-box {
+    margin-top: 2.5rem; /* Tarik kotak sedikit ke atas */
+}
+/* Memastikan hero-box mengisi ruang sepenuhnya */
+.hero-box {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 24px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    width: 100%;
+}
 /* 1. Pengaturan Dasar Layout Halaman */
 .block-container {
     padding-top: 1.5rem !important;
@@ -10,10 +32,9 @@
 .hero-box {
     background: linear-gradient(135deg, #1e3a8a, #3b82f6);
     color: white;
-    padding: 24px; /* Ditingkatkan sedikit untuk ruang */
+    padding: 24px;
     border-radius: 10px;
-    margin-bottom: 25px; /* Memberi ruang ke elemen di bawahnya */
-    overflow: hidden; /* Mencegah konten keluar dari kotak */
+    width: 100%;
 }
 
 .hero-box h1 {
